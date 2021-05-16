@@ -44,6 +44,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
         "symfony/debug-bundle": "^5.2",
@@ -51,7 +52,8 @@
         "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
-        "symfony/web-profiler-bundle": "^5.2"
+        "symfony/web-profiler-bundle": "^5.2",
+        "symfony/test-pack":"^1.0.7"
     },
     "config": {
         "optimize-autoloader": true,
@@ -76,16 +78,21 @@
         "symfony/polyfill-php72": "*"
     },
     "scripts": {
-        "test":"bin/phpunit",
+        "test":"vendor/bin/phpunit",
+        "yaml-lint":"vendor/bin/yaml-lint",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@yaml-lint src",
+            "@yaml-lint config"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "@yaml-lint src",
+            "@yaml-lint config"
         ]
     },
     "conflict": {
